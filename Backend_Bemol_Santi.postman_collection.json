@@ -12,12 +12,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/clientes",
-					"protocol": "http",
+					"raw": "{{API_URL}}/clientes",
 					"host": [
-						"localhost"
+						"{{API_URL}}"
 					],
-					"port": "3000",
 					"path": [
 						"clientes"
 					]
@@ -40,12 +38,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/clientes",
-					"protocol": "http",
+					"raw": "{{API_URL}}/clientes",
 					"host": [
-						"localhost"
+						"{{API_URL}}"
 					],
-					"port": "3000",
 					"path": [
 						"clientes"
 					]
@@ -68,12 +64,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/clientes/2",
-					"protocol": "http",
+					"raw": "{{API_URL}}/clientes/2",
 					"host": [
-						"localhost"
+						"{{API_URL}}"
 					],
-					"port": "3000",
 					"path": [
 						"clientes",
 						"2"
@@ -88,12 +82,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/clientes/2",
-					"protocol": "http",
+					"raw": "{{API_URL}}/clientes/2",
 					"host": [
-						"localhost"
+						"{{API_URL}}"
 					],
-					"port": "3000",
 					"path": [
 						"clientes",
 						"2"
@@ -108,12 +100,10 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/clientes/2",
-					"protocol": "http",
+					"raw": "{{API_URL}}/clientes/2",
 					"host": [
-						"localhost"
+						"{{API_URL}}"
 					],
-					"port": "3000",
 					"path": [
 						"clientes",
 						"2"
