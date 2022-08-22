@@ -17,7 +17,7 @@ const client = await mongodb.MongoClient.connect(connectionString, options);
 
 const app = express();
 
-const port = 3000;
+const port = process.env.Port || 3000;
 
 app.use(bodyParser.json());
 
@@ -111,21 +111,23 @@ app.post('/clientes', async (req,res) => {
   const cadastro = req.body;
 
   if(!cadastro) { 
-      res.send('Cadastro invalido');
+      res.send('Cadastro de cliente invalido.');
 
     return;
   }
 
   //cliente.id = clientes.length+1;
-  //clientes.push(cliente);
-    const dadosDaEntrega= await localEntrega.insertOne(cadastro.dadosEntrega);
-      
-    const dadosDoCliente = await clientes.insertOne(cadastro.dadosCliente);
-
-    dadosDoCliente.idLocalEntrega.update(dadosDaEntrega._id);    //PAREI AQUI
+  //clientes.push(cliente);  
+    const {insertedCount} = await clientes.insertOne(cadastro);
      
-  console.log(cadastro);
-  //res.send(cliente);
+  //console.log(dadosDoCliente);
+  /*
+  if(insertedCount !== 1){
+    res.send('Ocorreu uma falha no cadastro do cliente.');
+    return;
+  }
+  */
+  res.send(cadastro);
   
 })
 
@@ -149,46 +151,75 @@ app.get('/clientes/:id', async (req,res) => {
 });
 
 //- [PUT] /atualiza_cliente/{id} - Atualiza uma cliente pelo ID
-app.put('/clientes/:id', (req,res) => {
-  const id = +req.params.id;
+app.put('/clientes/:id', async (req,res) => {
+  const id = req.params.id;
 
   //let index = getClienteByIdcpf(id).id;
-
   const novoCliente = req.body;
+ 
+  if(!novoCliente
+    ||!novoCliente.nome
+    ||!novoCliente.Telcelular
+    ||!novoCliente.Idcpf
+    ||!novoCliente.senha){
 
-  if(!novoCliente){
-    res.send('Cliente invalido');
+    res.send('Cliente com dados inválidos.');
     return;
   }
-  const index = id-1;
-  delete getClienteByIdcpf(id);
-  novoCliente.id = id;
-  clientes[index]=novoCliente;
-  const cliente = getClienteByIdcpf(id);
 
-  res.send(cliente);
+  const quantClientes = await clientes.countDocuments( {_id: ObjectId(id) });
 
+  if(quantClientes !== 1) {
+    res.send('Cliente não encontrado.');
+
+    return;
+  }
+
+  const {result} = await clientes.updateOne(
+    {
+      _id: ObjectId(id)
+    },
+    {
+      $set: novoCliente
+    }
+  );
+
+  //if(result.ok !== 1) {
+  //  res.send('Ocorreu um erro ao atualizar o cliente.');
+
+ //   return;
+  //};
+
+  res.send(await getClienteByIdcpf(id));
+  
 });
 
 //- [DELETE] /apaga_cliente/{id} - Remover um cliente pelo ID
-app.delete('/clientes/:id', (req,res) => {
-  const id = +req.params.id;
+app.delete('/clientes/:id', async (req,res) => {
+  const id = req.params.id;
 
-  const cliente = getClienteByIdcpf(id);
+  //const cliente = getClienteByIdcpf(id);
+  const quantClientes = await clientes.countDocuments( {_id: ObjectId(id)} );
 
-  if (!cliente){
-    res.send('Cliente não encontrado.');
+  if(quantClientes !== 1 ){
+    res.send('Cliente nao encontrado.');
+
     return;
   }
+  const {deletedCount} = await clientes.deleteOne({ _id: ObjectId(id)});
 
-  const index = clientes.indexOf(cliente);
-  delete clientes[index];
+  if(deletedCount !== 1 ) {
+    res.send('Ocorreu um erro ao remover o cliente.');
 
+    return;
+  };
+  
   res.send('Cliente removido com sucesso.');
+
 });
 
 app.listen(port, function(){
     console.info('App rodando em http://localhost:'+ port);
-})
+});
 
 })();
