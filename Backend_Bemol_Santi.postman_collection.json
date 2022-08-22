@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "8942c0f2-48d6-47ed-b78d-2e16f956c5e3",
+		"name": "Backend_Bemol_Santi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22926143"
+	},
+	"item": [
+		{
+			"name": "Listar de todos os cientes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar novo cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n    \"nome\": \"Franboesa Cristina\",\r\n    \"dataNascimento\": \"27/07/2000\",\r\n    \"genero\":\"Feminino\",\r\n    \"Idcpf\": \"0000000009\",\r\n    \"domicilio\":\"Casa\",\r\n    \"cep\":\"69000000\",\r\n    \"endereço\": \"Av. Alphaville\",\r\n    \"bairro\": \"Cidade Nova\",\r\n    \"cidade\": \"Manaus\",\r\n    \"estado\": \"Amazonas\",\r\n    \"referencia\": \"Oficina batista\",\r\n    \"Telcelular\": \"92982765182\",\r\n    \"email\": \"email.cao@gmail.com \",\r\n    \"senha\": \"@desafiobemol\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar cliente pelo ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Franboesa Cristina\",\r\n    \"dataNascimento\": \"27/07/2000\",\r\n    \"genero\":\"Feminino\",\r\n    \"Idcpf\": \"0000000009\",\r\n    \"domicilio\":\"Casa\",\r\n    \"cep\":\"69000000\",\r\n    \"endereço\": \"Av. Alphaville\",\r\n    \"bairro\": \"Cidade Nova\",\r\n    \"cidade\": \"Manaus\",\r\n    \"estado\": \"Amazonas\",\r\n    \"referencia\": \"Oficina batista\",\r\n    \"Telcelular\": \"92982765182\",\r\n    \"email\": \"email.cao@gmail.com \",\r\n    \"senha\": \"@desafiobemol\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/clientes/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"clientes",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar cliente pelo ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/clientes/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"clientes",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remover cliente pelo ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/clientes/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"clientes",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
